@@ -20,8 +20,9 @@ namespace Configurador_Central_Ethernet
         UdpClient Client = new UdpClient(PORT_NUMBER);
         string data = "";
         IAsyncResult ar_ = null;
-        IPAddress IP_MACHINE_0 = null;
-        String ip_broadcast, Rec_msg, Send_Data;
+        IPAddress[] IP_MACHINE_0 = new IPAddress[10];
+        String  Rec_msg, Send_Data;
+        String[] ip_broadcast = new String[10];
         IPEndPoint ip;
         
         public Form1()
@@ -33,12 +34,21 @@ namespace Configurador_Central_Ethernet
 
         private void LoadForm1(object sender, EventArgs e)
         {
+            int j = 0;
             String name = Dns.GetHostName();
             IPHostEntry host = Dns.GetHostEntry(name);
-            IP_MACHINE_0 = host.AddressList[host.AddressList.Length - 1];
-            Byte[] bytes = IP_MACHINE_0.GetAddressBytes();
-            ip_broadcast = bytes[0].ToString() + "." + bytes[1].ToString() + "." + bytes[2].ToString() + ".255";
-            richTextBox1.AppendText(ip_broadcast);
+            for(int a = 0; a < host.AddressList.Length; a++)
+            {
+                if(IsAddressValid(host.AddressList[a].ToString()))
+                {
+                    IP_MACHINE_0[j] = host.AddressList[a];
+                    Byte[] bytes = IP_MACHINE_0[j].GetAddressBytes();
+                    ip_broadcast[j] = bytes[0].ToString() + "." + bytes[1].ToString() + "." + bytes[2].ToString() + ".255";
+                    richTextBox1.AppendText(ip_broadcast[j]+ "\n");
+                    j++;
+                }
+            }
+            
             StartListening();
         }
              
@@ -90,15 +100,24 @@ namespace Configurador_Central_Ethernet
         {
             UdpClient client = new UdpClient();
             IPEndPoint ip1 = new IPEndPoint(IPAddress.Parse(Ip), PORT_NUMBER);
-            byte[] bytes = Encoding.ASCII.GetBytes(message);
-            client.Send(bytes, bytes.Length, ip1);
+            try{
+                byte[] bytes = Encoding.ASCII.GetBytes(message);
+                client.Send(bytes, bytes.Length, ip1);
+            }catch (Exception ex) { /* do nothing */}            
             client.Close();
             richTextBox2.AppendText(message + "\n");
         }
 
         private void search_data_Click(object sender, EventArgs e)
         {
-           Send("broadcast_teste", ip_broadcast);
+            foreach(String ip in ip_broadcast)
+            {
+                if (ip != null)
+                {
+                    Send("broadcast_teste", ip);
+                }
+            }
+            
 
         }
 
