@@ -146,6 +146,22 @@ namespace Configurador_Central_Ethernet
             
         }
 
+        public void clean_config_data()
+        {
+            ip_concentrador.Text = "";
+            porta_concentrador.Text = "";
+            bico0a.Text = "";
+            bico1a.Text = "";
+            bico2a.Text = "";
+            bico3a.Text = "";
+            bico4a.Text = "";
+            bico5a.Text = "";
+            bico6a.Text = "";
+            bico7a.Text = "";
+            bico8a.Text = "";
+            bico9a.Text = "";
+        }
+
         private void tabControl1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             // Check Credentials Here  
