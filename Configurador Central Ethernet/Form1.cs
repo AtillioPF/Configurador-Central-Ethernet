@@ -109,6 +109,7 @@ namespace Configurador_Central_Ethernet
 
         }
 
+        // confirmação para mudar de pagina
         private void confirm_selection_click(object sender, EventArgs e)
         {
             if(IP_list.SelectedItem != null)
