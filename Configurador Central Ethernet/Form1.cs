@@ -15,6 +15,7 @@ namespace Configurador_Central_Ethernet
 {
     public partial class Form1 : Form
     {
+        bool datasent = false;
         bool permission = false;
         const int PORT_NUMBER = 2126;
         UdpClient Client = new UdpClient(PORT_NUMBER);
@@ -24,16 +25,31 @@ namespace Configurador_Central_Ethernet
         String  Rec_msg, Send_Data;
         String[] ip_broadcast = new String[10];
         IPEndPoint ip;
+
         
         public Form1()
         {
             InitializeComponent();
-            this.tabControl1.SelectedTab = connection_page;  
-               
+            this.tabControl1.SelectedTab = connection_page;
+            Timer1.Interval = 3000;
+        }
+
+        private void Timer1_Tick(object Sender, EventArgs e)
+        {
+            if(tabControl1.SelectedTab == connection_page)
+            {
+                MessageBox.Show("Nenhuma placa encontrada.");
+            }
+            else
+            {
+                MessageBox.Show("Nenhuma resposta da placa.");
+            }
+            Timer1.Stop();
         }
 
         private void LoadForm1(object sender, EventArgs e)
         {
+            
             int j = 0;
             String name = Dns.GetHostName();
             IPHostEntry host = Dns.GetHostEntry(name);
@@ -63,12 +79,14 @@ namespace Configurador_Central_Ethernet
             ip = new IPEndPoint(IPAddress.Any, PORT_NUMBER);
             byte[] bytes = Client.EndReceive(ar, ref ip);
             Rec_msg = Encoding.ASCII.GetString(bytes);
-            richTextBox1.AppendText(Rec_msg);
+            if(Rec_msg!="broadcast_teste")
+                richTextBox1.AppendText(Rec_msg);
             StartListening();
         }
 
         private void change1(object sender, EventArgs e)
         {
+            Timer1.Stop();
             if (Rec_msg == "ok")
             {
                 try
@@ -83,6 +101,7 @@ namespace Configurador_Central_Ethernet
                     string ip1 = ip.Address.ToString();
                     IP_list.Items.Add(ip1 + "\t" + "Unknown Host");
                 }
+
                 
             }
             else if (permission)
@@ -90,7 +109,11 @@ namespace Configurador_Central_Ethernet
                 string ip1 = ip.Address.ToString();                
                 if (ip1==ip_placa.Text)
                 {                  
-                        CompleteData(Rec_msg);                    
+                        CompleteData(Rec_msg);
+                    if (datasent == true)
+                        MessageBox.Show("Dados enviados com sucesso.");
+                    else
+                        MessageBox.Show("Dados recebidos com sucesso.");
                 }
             }
             
@@ -103,21 +126,25 @@ namespace Configurador_Central_Ethernet
             try{
                 byte[] bytes = Encoding.ASCII.GetBytes(message);
                 client.Send(bytes, bytes.Length, ip1);
-            }catch (Exception ex) { /* do nothing */}            
+                datasent = true;
+            }
+            catch (Exception ex) { /* do nothing */}            
             client.Close();
             richTextBox2.AppendText(message + "\n");
+            
         }
 
         private void search_data_Click(object sender, EventArgs e)
         {
-            foreach(String ip in ip_broadcast)
+            this.IP_list.Items.Clear(); 
+            foreach (String ip in ip_broadcast)
             {
                 if (ip != null)
                 {
                     Send("broadcast_teste", ip);
                 }
             }
-            
+            Timer1.Start();
 
         }
 
@@ -160,6 +187,16 @@ namespace Configurador_Central_Ethernet
             bico7a.Text = "";
             bico8a.Text = "";
             bico9a.Text = "";
+            preco0.Text = "";
+            preco1.Text = "";
+            preco2.Text = "";
+            preco3.Text = "";
+            preco4.Text = "";
+            preco5.Text = "";
+            preco6.Text = "";
+            preco7.Text = "";
+            preco8.Text = "";
+            preco9.Text = "";
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -310,8 +347,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);
-                return;
+                Send_Data = Send_Data + "-AA";                
             }
 
             if (!string.IsNullOrEmpty(bico1.Text) )
@@ -320,8 +356,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);                
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
             if (!string.IsNullOrEmpty(bico2.Text) )
@@ -330,8 +365,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);               
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
             if (!string.IsNullOrEmpty(bico3.Text) )
@@ -340,8 +374,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);               
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
             if (!string.IsNullOrEmpty(bico4.Text) )
@@ -350,8 +383,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);                
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
             if (!string.IsNullOrEmpty(bico5.Text) )
@@ -360,8 +392,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);                
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
             if (!string.IsNullOrEmpty(bico6.Text) )
@@ -370,8 +401,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);                
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
             if (!string.IsNullOrEmpty(bico7.Text) )
@@ -380,8 +410,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);               
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
             if (!string.IsNullOrEmpty(bico8.Text) )
@@ -390,8 +419,7 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);               
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
             if (!string.IsNullOrEmpty(bico9.Text) )
@@ -400,12 +428,13 @@ namespace Configurador_Central_Ethernet
             }
             else
             {
-                Send(Send_Data, ip_placa.Text);                
-                return;
+                Send_Data = Send_Data + "-AA";
             }
 
+            Send_Data = Send_Data + "-AA-AA-AA-AA-AA-AA-AA-AA-AA-AA";
+            Send(Send_Data, ip_placa.Text);
+            Timer1.Start();
 
-            Send(Send_Data, ip_placa.Text);            
         }
 
         public void CompleteData(string message)
@@ -418,113 +447,173 @@ namespace Configurador_Central_Ethernet
             porta_concentrador.Text = message.Substring(0, a);
             message = message.Substring(a + 1);
             a = message.IndexOf("-");
-            if (a > 0)
-            {
-                bico0a.Text = message.Substring(0, a);
-                message = message.Substring(a + 1);
-                a = message.IndexOf("-");
-                if (a > 0)
-                {
-                    bico1a.Text = message.Substring(0, a);
-                    message = message.Substring(a + 1);
-                    a = message.IndexOf("-");
-                    if (a > 0)
-                    {
-                        bico2a.Text = message.Substring(0, a);
-                        message = message.Substring(a + 1);
-                        a = message.IndexOf("-");
-                        if (a > 0)
-                        {
-                            bico3a.Text = message.Substring(0, a);
-                            message = message.Substring(a + 1);
-                            a = message.IndexOf("-");
-                            if (a > 0)
-                            {
-                                bico4a.Text = message.Substring(0, a);
-                                message = message.Substring(a + 1);
-                                a = message.IndexOf("-");
-                                if (a > 0)
-                                {
-                                    bico5a.Text = message.Substring(0, a);
-                                    message = message.Substring(a + 1);
-                                    a = message.IndexOf("-");
-                                    if (a > 0)
-                                    {
-                                        bico6a.Text = message.Substring(0, a);
-                                        message = message.Substring(a + 1);
-                                        a = message.IndexOf("-");
-                                        if (a > 0)
-                                        {
-                                            bico7a.Text = message.Substring(0, a);
-                                            message = message.Substring(a + 1);
-                                            a = message.IndexOf("-");
-                                            if (a > 0)
-                                            {
-                                                bico8a.Text = message.Substring(0, a);
-                                                message = message.Substring(a + 1);
-                                                a = message.IndexOf("-");
-                                                if (a > 0)
-                                                {
-                                                    bico9a.Text = message.Substring(0, a);
-                                                    message = message.Substring(a + 1);
-                                                    a = message.IndexOf("-");
-                                                }
-                                                else if (message.Length > 0)
-                                                {
-                                                    bico9a.Text = message;
-                                                }
-                                            }
-                                            else if (message.Length > 0)
-                                            {
-                                                bico8a.Text = message;
-                                            }
-                                        }
-                                        else if (message.Length > 0)
-                                        {
-                                            bico7a.Text = message;
-                                        }
-                                    }
-                                    else if (message.Length > 0)
-                                    {
-                                        bico6a.Text = message;
-                                    }
-                                }
-                                else if (message.Length > 0)
-                                {
-                                    bico5a.Text = message;
-                                }
-                            }
-                            else if (message.Length > 0)
-                            {
-                                bico4a.Text = message;
-                            }
-                        }
-                        else if (message.Length > 0)
-                        {
-                            bico3a.Text = message;
-                        }
-                    }
-                    else if (message.Length > 0)
-                    {
-                        bico2a.Text = message;
-                    }
-                    
-                }
-                else if(message.Length > 0)
-                {
-                    bico1a.Text = message;
-                }
-            }
-            else if(message.Length > 0)
-            {
-                bico0a.Text = message;
-            }
-                    
+
+            //BICO 0
+            if(message.Substring(0, a) == "AA")
+                bico0a.Text = "";                
+            else 
+                bico0a.Text = message.Substring(0, a); 
+                
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 1
+            if (message.Substring(0, a) == "AA")
+                bico1a.Text = "";
+            else
+                bico1a.Text = message.Substring(0, a);
+            
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 2
+            if (message.Substring(0, a) == "AA")
+                bico2a.Text = "";
+            else
+                bico2a.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 3
+            if (message.Substring(0, a) == "AA")
+                bico3a.Text = "";
+            else
+                bico3a.Text = message.Substring(0, a);
+            
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 4
+            if (message.Substring(0, a) == "AA")
+                bico4a.Text = "";
+            else
+                bico4a.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 5
+            if (message.Substring(0, a) == "AA")
+                bico5a.Text = "";
+            else
+                bico5a.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 6
+            if (message.Substring(0, a) == "AA")
+                bico6a.Text = "";
+            else
+                bico6a.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 7
+            if (message.Substring(0, a) == "AA")
+                bico7a.Text = "";
+            else
+                bico7a.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 8
+            if (message.Substring(0, a) == "AA")
+                bico8a.Text = "";
+            else
+                bico8a.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //BICO 9
+            if (message.Substring(0, a) == "AA")
+                bico9a.Text = "";
+            else
+                bico9a.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 0
+            if (message.Substring(0, a) == "AA")
+                preco0.Text = "";
+            else
+                preco0.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 1
+            if (message.Substring(0, a) == "AA")
+                preco1.Text = "";
+            else
+                preco1.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 2
+            if (message.Substring(0, a) == "AA")
+                preco2.Text = "";
+            else
+                preco2.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 3
+            if (message.Substring(0, a) == "AA")
+                preco3.Text = "";
+            else
+                preco3.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 4
+            if (message.Substring(0, a) == "AA")
+                preco4.Text = "";
+            else
+                preco4.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 5
+            if (message.Substring(0, a) == "AA")
+                preco5.Text = "";
+            else
+                preco5.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 6
+            if (message.Substring(0, a) == "AA")
+                preco6.Text = "";
+            else
+                preco6.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 7
+            if (message.Substring(0, a) == "AA")
+                preco7.Text = "";
+            else
+                preco7.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 8
+            if (message.Substring(0, a) == "AA")
+                preco8.Text = "";
+            else
+                preco8.Text = message.Substring(0, a);
+
+            message = message.Substring(a + 1);
+            a = message.IndexOf("-");
+            //PREÇO 9
+            if (message.Substring(0, a) == "AA")
+                preco9.Text = "";
+            else
+                preco9.Text = message.Substring(0, a);
+
         }
 
         private void receber_dados_Click(object sender, EventArgs e)
-        {   
+        {
+            clean_config_data();
             Send("GET", ip_placa.Text);
+            datasent = false;
+            Timer1.Start();
         }
 
     
@@ -534,6 +623,8 @@ namespace Configurador_Central_Ethernet
             IPAddress address;
             return IPAddress.TryParse(addrString, out address);
         }
+
+        
 
         public bool ValidateText(string text)
         {

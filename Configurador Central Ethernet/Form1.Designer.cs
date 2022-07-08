@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.config_page = new System.Windows.Forms.TabPage();
             this.enviar_dados = new System.Windows.Forms.Button();
             this.receber_dados = new System.Windows.Forms.Button();
@@ -67,29 +68,41 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.preco9 = new System.Windows.Forms.TextBox();
             this.bico9a = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
+            this.preco8 = new System.Windows.Forms.TextBox();
             this.bico8a = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
+            this.preco7 = new System.Windows.Forms.TextBox();
             this.bico7a = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
+            this.preco6 = new System.Windows.Forms.TextBox();
             this.bico6a = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.preco5 = new System.Windows.Forms.TextBox();
             this.bico5a = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.preco4 = new System.Windows.Forms.TextBox();
             this.bico4a = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.preco3 = new System.Windows.Forms.TextBox();
             this.bico3a = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.preco2 = new System.Windows.Forms.TextBox();
             this.bico2a = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.preco1 = new System.Windows.Forms.TextBox();
             this.bico1a = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.preco0 = new System.Windows.Forms.TextBox();
             this.bico0a = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.connection_page = new System.Windows.Forms.TabPage();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
@@ -103,7 +116,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.search_data = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.Timer1 = new System.Windows.Forms.Timer(this.components);
             this.config_page.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -127,7 +140,7 @@
             this.config_page.Location = new System.Drawing.Point(4, 39);
             this.config_page.Name = "config_page";
             this.config_page.Padding = new System.Windows.Forms.Padding(3);
-            this.config_page.Size = new System.Drawing.Size(838, 449);
+            this.config_page.Size = new System.Drawing.Size(883, 449);
             this.config_page.TabIndex = 1;
             this.config_page.Text = "Configurações";
             // 
@@ -136,7 +149,7 @@
             this.enviar_dados.BackColor = System.Drawing.Color.Black;
             this.enviar_dados.Cursor = System.Windows.Forms.Cursors.Hand;
             this.enviar_dados.ForeColor = System.Drawing.Color.White;
-            this.enviar_dados.Location = new System.Drawing.Point(528, 362);
+            this.enviar_dados.Location = new System.Drawing.Point(589, 362);
             this.enviar_dados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.enviar_dados.Name = "enviar_dados";
             this.enviar_dados.Size = new System.Drawing.Size(186, 60);
@@ -150,7 +163,7 @@
             this.receber_dados.BackColor = System.Drawing.Color.Black;
             this.receber_dados.Cursor = System.Windows.Forms.Cursors.Hand;
             this.receber_dados.ForeColor = System.Drawing.Color.White;
-            this.receber_dados.Location = new System.Drawing.Point(528, 292);
+            this.receber_dados.Location = new System.Drawing.Point(589, 292);
             this.receber_dados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.receber_dados.Name = "receber_dados";
             this.receber_dados.Size = new System.Drawing.Size(186, 60);
@@ -168,7 +181,7 @@
             this.panel6.Controls.Add(this.label35);
             this.panel6.Controls.Add(this.porta_concentrador);
             this.panel6.Controls.Add(this.ip_concentrador);
-            this.panel6.Location = new System.Drawing.Point(438, 151);
+            this.panel6.Location = new System.Drawing.Point(499, 151);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(374, 124);
             this.panel6.TabIndex = 3;
@@ -226,7 +239,7 @@
             this.panel4.Controls.Add(this.ip_placa);
             this.panel4.Controls.Add(this.hostname);
             this.panel4.Controls.Add(this.label31);
-            this.panel4.Location = new System.Drawing.Point(438, 10);
+            this.panel4.Location = new System.Drawing.Point(499, 10);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(374, 128);
             this.panel4.TabIndex = 2;
@@ -304,7 +317,7 @@
             this.panel3.Controls.Add(this.label18);
             this.panel3.Controls.Add(this.label19);
             this.panel3.Controls.Add(this.label20);
-            this.panel3.Location = new System.Drawing.Point(209, 10);
+            this.panel3.Location = new System.Drawing.Point(291, 10);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(201, 430);
             this.panel3.TabIndex = 1;
@@ -523,32 +536,51 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.preco9);
             this.panel2.Controls.Add(this.bico9a);
             this.panel2.Controls.Add(this.label27);
+            this.panel2.Controls.Add(this.preco8);
             this.panel2.Controls.Add(this.bico8a);
             this.panel2.Controls.Add(this.label28);
+            this.panel2.Controls.Add(this.preco7);
             this.panel2.Controls.Add(this.bico7a);
             this.panel2.Controls.Add(this.label29);
+            this.panel2.Controls.Add(this.preco6);
             this.panel2.Controls.Add(this.bico6a);
             this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.preco5);
             this.panel2.Controls.Add(this.bico5a);
             this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.preco4);
             this.panel2.Controls.Add(this.bico4a);
             this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.preco3);
             this.panel2.Controls.Add(this.bico3a);
             this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.preco2);
             this.panel2.Controls.Add(this.bico2a);
             this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.preco1);
             this.panel2.Controls.Add(this.bico1a);
             this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.preco0);
             this.panel2.Controls.Add(this.bico0a);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label36);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(8, 10);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(190, 430);
+            this.panel2.Size = new System.Drawing.Size(277, 430);
             this.panel2.TabIndex = 1;
+            // 
+            // preco9
+            // 
+            this.preco9.Enabled = false;
+            this.preco9.Location = new System.Drawing.Point(186, 390);
+            this.preco9.Name = "preco9";
+            this.preco9.Size = new System.Drawing.Size(71, 29);
+            this.preco9.TabIndex = 6;
             // 
             // bico9a
             // 
@@ -568,6 +600,14 @@
             this.label27.TabIndex = 3;
             this.label27.Text = "Painel 9";
             // 
+            // preco8
+            // 
+            this.preco8.Enabled = false;
+            this.preco8.Location = new System.Drawing.Point(186, 355);
+            this.preco8.Name = "preco8";
+            this.preco8.Size = new System.Drawing.Size(71, 29);
+            this.preco8.TabIndex = 7;
+            // 
             // bico8a
             // 
             this.bico8a.Enabled = false;
@@ -585,6 +625,14 @@
             this.label28.Size = new System.Drawing.Size(64, 21);
             this.label28.TabIndex = 4;
             this.label28.Text = "Painel 8";
+            // 
+            // preco7
+            // 
+            this.preco7.Enabled = false;
+            this.preco7.Location = new System.Drawing.Point(186, 320);
+            this.preco7.Name = "preco7";
+            this.preco7.Size = new System.Drawing.Size(71, 29);
+            this.preco7.TabIndex = 8;
             // 
             // bico7a
             // 
@@ -604,6 +652,14 @@
             this.label29.TabIndex = 5;
             this.label29.Text = "Painel 7";
             // 
+            // preco6
+            // 
+            this.preco6.Enabled = false;
+            this.preco6.Location = new System.Drawing.Point(186, 286);
+            this.preco6.Name = "preco6";
+            this.preco6.Size = new System.Drawing.Size(71, 29);
+            this.preco6.TabIndex = 2;
+            // 
             // bico6a
             // 
             this.bico6a.Enabled = false;
@@ -621,6 +677,14 @@
             this.label11.Size = new System.Drawing.Size(64, 21);
             this.label11.TabIndex = 0;
             this.label11.Text = "Painel 6";
+            // 
+            // preco5
+            // 
+            this.preco5.Enabled = false;
+            this.preco5.Location = new System.Drawing.Point(186, 251);
+            this.preco5.Name = "preco5";
+            this.preco5.Size = new System.Drawing.Size(71, 29);
+            this.preco5.TabIndex = 2;
             // 
             // bico5a
             // 
@@ -640,6 +704,14 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Painel 5";
             // 
+            // preco4
+            // 
+            this.preco4.Enabled = false;
+            this.preco4.Location = new System.Drawing.Point(186, 216);
+            this.preco4.Name = "preco4";
+            this.preco4.Size = new System.Drawing.Size(71, 29);
+            this.preco4.TabIndex = 2;
+            // 
             // bico4a
             // 
             this.bico4a.Enabled = false;
@@ -657,6 +729,14 @@
             this.label9.Size = new System.Drawing.Size(64, 21);
             this.label9.TabIndex = 0;
             this.label9.Text = "Painel 4";
+            // 
+            // preco3
+            // 
+            this.preco3.Enabled = false;
+            this.preco3.Location = new System.Drawing.Point(186, 181);
+            this.preco3.Name = "preco3";
+            this.preco3.Size = new System.Drawing.Size(71, 29);
+            this.preco3.TabIndex = 2;
             // 
             // bico3a
             // 
@@ -676,6 +756,14 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Painel 3";
             // 
+            // preco2
+            // 
+            this.preco2.Enabled = false;
+            this.preco2.Location = new System.Drawing.Point(186, 146);
+            this.preco2.Name = "preco2";
+            this.preco2.Size = new System.Drawing.Size(71, 29);
+            this.preco2.TabIndex = 2;
+            // 
             // bico2a
             // 
             this.bico2a.Enabled = false;
@@ -694,6 +782,14 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Painel 2";
             // 
+            // preco1
+            // 
+            this.preco1.Enabled = false;
+            this.preco1.Location = new System.Drawing.Point(186, 111);
+            this.preco1.Name = "preco1";
+            this.preco1.Size = new System.Drawing.Size(71, 29);
+            this.preco1.TabIndex = 2;
+            // 
             // bico1a
             // 
             this.bico1a.Enabled = false;
@@ -711,6 +807,14 @@
             this.label6.Size = new System.Drawing.Size(64, 21);
             this.label6.TabIndex = 0;
             this.label6.Text = "Painel 1";
+            // 
+            // preco0
+            // 
+            this.preco0.Enabled = false;
+            this.preco0.Location = new System.Drawing.Point(186, 76);
+            this.preco0.Name = "preco0";
+            this.preco0.Size = new System.Drawing.Size(71, 29);
+            this.preco0.TabIndex = 2;
             // 
             // bico0a
             // 
@@ -734,11 +838,21 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(20, 10);
+            this.label4.Location = new System.Drawing.Point(65, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(143, 21);
             this.label4.TabIndex = 0;
             this.label4.Text = "Configuração Atual";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.ForeColor = System.Drawing.Color.White;
+            this.label36.Location = new System.Drawing.Point(193, 47);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(56, 21);
+            this.label36.TabIndex = 0;
+            this.label36.Text = "Preços";
             // 
             // label1
             // 
@@ -762,9 +876,17 @@
             this.connection_page.Location = new System.Drawing.Point(4, 39);
             this.connection_page.Name = "connection_page";
             this.connection_page.Padding = new System.Windows.Forms.Padding(3);
-            this.connection_page.Size = new System.Drawing.Size(838, 449);
+            this.connection_page.Size = new System.Drawing.Size(883, 449);
             this.connection_page.TabIndex = 0;
             this.connection_page.Text = "Conexão";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(533, 331);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(297, 110);
+            this.richTextBox2.TabIndex = 10;
+            this.richTextBox2.Text = "";
             // 
             // richTextBox1
             // 
@@ -918,24 +1040,20 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(846, 492);
+            this.tabControl1.Size = new System.Drawing.Size(891, 492);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // richTextBox2
+            // Timer1
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(533, 331);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(297, 110);
-            this.richTextBox2.TabIndex = 10;
-            this.richTextBox2.Text = "";
+            this.Timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(848, 493);
+            this.ClientSize = new System.Drawing.Size(891, 493);
             this.Controls.Add(this.tabControl1);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "Form1";
@@ -1037,5 +1155,17 @@
         private System.Windows.Forms.Button receber_dados;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.TextBox preco9;
+        private System.Windows.Forms.TextBox preco8;
+        private System.Windows.Forms.TextBox preco7;
+        private System.Windows.Forms.TextBox preco6;
+        private System.Windows.Forms.TextBox preco5;
+        private System.Windows.Forms.TextBox preco4;
+        private System.Windows.Forms.TextBox preco3;
+        private System.Windows.Forms.TextBox preco2;
+        private System.Windows.Forms.TextBox preco1;
+        private System.Windows.Forms.TextBox preco0;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Timer Timer1;
     }
 }
