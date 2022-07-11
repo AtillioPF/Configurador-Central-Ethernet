@@ -38,13 +38,15 @@ namespace Configurador_Central_Ethernet
         {
             if(tabControl1.SelectedTab == connection_page)
             {
-                MessageBox.Show("Nenhuma placa encontrada.");
+                Timer1.Stop();
+                MessageBox.Show("Nenhuma placa encontrada.","Mensagem automática.");
             }
             else
             {
-                MessageBox.Show("Nenhuma resposta da placa.");
+                Timer1.Stop();
+                MessageBox.Show("Nenhuma resposta da placa.","Falha na comunicação.");
             }
-            Timer1.Stop();
+            
         }
 
         private void LoadForm1(object sender, EventArgs e)
@@ -86,11 +88,12 @@ namespace Configurador_Central_Ethernet
 
         private void change1(object sender, EventArgs e)
         {
-            Timer1.Stop();
+            
             if (Rec_msg == "ok")
             {
                 try
                 {
+                    Timer1.Stop();
                     string ip1 = ip.Address.ToString();
                     IPHostEntry host = Dns.GetHostByAddress(ip.Address);
                     string hostname = host.HostName.ToString();
@@ -110,10 +113,16 @@ namespace Configurador_Central_Ethernet
                 if (ip1==ip_placa.Text)
                 {                  
                         CompleteData(Rec_msg);
-                    if (datasent == true)
-                        MessageBox.Show("Dados enviados com sucesso.");
-                    else
-                        MessageBox.Show("Dados recebidos com sucesso.");
+                    if (datasent == true && Timer1.Enabled==true)
+                    {
+                        Timer1.Stop();
+                        MessageBox.Show("Dados enviados com sucesso.","Mensagem automática.");
+                    }
+                    else if (datasent == false && Timer1.Enabled == true)
+                    {
+                        Timer1.Stop(); 
+                        MessageBox.Show("Dados recebidos com sucesso.", "Mensagem automática.");                        
+                    }
                 }
             }
             
@@ -144,6 +153,7 @@ namespace Configurador_Central_Ethernet
                     Send("broadcast_teste", ip);
                 }
             }
+
             Timer1.Start();
 
         }
@@ -212,6 +222,14 @@ namespace Configurador_Central_Ethernet
                 tabControl1.SelectedTab = connection_page;
                 MessageBox.Show("Selecione primeiro uma placa na rede.");
 
+            }
+            if(tabControl1.SelectedTab == config_page)
+            {
+                Timer1.Interval = 2000;
+            }
+            else
+            {
+                Timer1.Interval = 3000;
             }
         }
 
@@ -433,6 +451,8 @@ namespace Configurador_Central_Ethernet
 
             Send_Data = Send_Data + "-AA-AA-AA-AA-AA-AA-AA-AA-AA-AA";
             Send(Send_Data, ip_placa.Text);
+            System.Threading.Thread.Sleep(300);
+            Send("GET", ip_placa.Text);
             Timer1.Start();
 
         }
@@ -448,164 +468,167 @@ namespace Configurador_Central_Ethernet
             message = message.Substring(a + 1);
             a = message.IndexOf("-");
 
-            //BICO 0
-            if(message.Substring(0, a) == "AA")
-                bico0a.Text = "";                
-            else 
-                bico0a.Text = message.Substring(0, a); 
-                
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 1
-            if (message.Substring(0, a) == "AA")
-                bico1a.Text = "";
-            else
-                bico1a.Text = message.Substring(0, a);
-            
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 2
-            if (message.Substring(0, a) == "AA")
-                bico2a.Text = "";
-            else
-                bico2a.Text = message.Substring(0, a);
+            try
+            {
+                //BICO 0
+                if (message.Substring(0, a) == "AA")
+                    bico0a.Text = "";
+                else
+                    bico0a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 3
-            if (message.Substring(0, a) == "AA")
-                bico3a.Text = "";
-            else
-                bico3a.Text = message.Substring(0, a);
-            
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 4
-            if (message.Substring(0, a) == "AA")
-                bico4a.Text = "";
-            else
-                bico4a.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 1
+                if (message.Substring(0, a) == "AA")
+                    bico1a.Text = "";
+                else
+                    bico1a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 5
-            if (message.Substring(0, a) == "AA")
-                bico5a.Text = "";
-            else
-                bico5a.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 2
+                if (message.Substring(0, a) == "AA")
+                    bico2a.Text = "";
+                else
+                    bico2a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 6
-            if (message.Substring(0, a) == "AA")
-                bico6a.Text = "";
-            else
-                bico6a.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 3
+                if (message.Substring(0, a) == "AA")
+                    bico3a.Text = "";
+                else
+                    bico3a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 7
-            if (message.Substring(0, a) == "AA")
-                bico7a.Text = "";
-            else
-                bico7a.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 4
+                if (message.Substring(0, a) == "AA")
+                    bico4a.Text = "";
+                else
+                    bico4a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 8
-            if (message.Substring(0, a) == "AA")
-                bico8a.Text = "";
-            else
-                bico8a.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 5
+                if (message.Substring(0, a) == "AA")
+                    bico5a.Text = "";
+                else
+                    bico5a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //BICO 9
-            if (message.Substring(0, a) == "AA")
-                bico9a.Text = "";
-            else
-                bico9a.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 6
+                if (message.Substring(0, a) == "AA")
+                    bico6a.Text = "";
+                else
+                    bico6a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 0
-            if (message.Substring(0, a) == "AA")
-                preco0.Text = "";
-            else
-                preco0.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 7
+                if (message.Substring(0, a) == "AA")
+                    bico7a.Text = "";
+                else
+                    bico7a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 1
-            if (message.Substring(0, a) == "AA")
-                preco1.Text = "";
-            else
-                preco1.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 8
+                if (message.Substring(0, a) == "AA")
+                    bico8a.Text = "";
+                else
+                    bico8a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 2
-            if (message.Substring(0, a) == "AA")
-                preco2.Text = "";
-            else
-                preco2.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //BICO 9
+                if (message.Substring(0, a) == "AA")
+                    bico9a.Text = "";
+                else
+                    bico9a.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 3
-            if (message.Substring(0, a) == "AA")
-                preco3.Text = "";
-            else
-                preco3.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 0
+                if (message.Substring(0, a) == "AA")
+                    preco0.Text = "";
+                else
+                    preco0.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 4
-            if (message.Substring(0, a) == "AA")
-                preco4.Text = "";
-            else
-                preco4.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 1
+                if (message.Substring(0, a) == "AA")
+                    preco1.Text = "";
+                else
+                    preco1.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 5
-            if (message.Substring(0, a) == "AA")
-                preco5.Text = "";
-            else
-                preco5.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 2
+                if (message.Substring(0, a) == "AA")
+                    preco2.Text = "";
+                else
+                    preco2.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 6
-            if (message.Substring(0, a) == "AA")
-                preco6.Text = "";
-            else
-                preco6.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 3
+                if (message.Substring(0, a) == "AA")
+                    preco3.Text = "";
+                else
+                    preco3.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 7
-            if (message.Substring(0, a) == "AA")
-                preco7.Text = "";
-            else
-                preco7.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 4
+                if (message.Substring(0, a) == "AA")
+                    preco4.Text = "";
+                else
+                    preco4.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 8
-            if (message.Substring(0, a) == "AA")
-                preco8.Text = "";
-            else
-                preco8.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 5
+                if (message.Substring(0, a) == "AA")
+                    preco5.Text = "";
+                else
+                    preco5.Text = message.Substring(0, a);
 
-            message = message.Substring(a + 1);
-            a = message.IndexOf("-");
-            //PREÇO 9
-            if (message.Substring(0, a) == "AA")
-                preco9.Text = "";
-            else
-                preco9.Text = message.Substring(0, a);
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 6
+                if (message.Substring(0, a) == "AA")
+                    preco6.Text = "";
+                else
+                    preco6.Text = message.Substring(0, a);
 
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 7
+                if (message.Substring(0, a) == "AA")
+                    preco7.Text = "";
+                else
+                    preco7.Text = message.Substring(0, a);
+
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 8
+                if (message.Substring(0, a) == "AA")
+                    preco8.Text = "";
+                else
+                    preco8.Text = message.Substring(0, a);
+
+                message = message.Substring(a + 1);
+                a = message.IndexOf("-");
+                //PREÇO 9
+                if (message.Substring(0, a) == "AA")
+                    preco9.Text = "";
+                else
+                    preco9.Text = message.Substring(0, a);
+            }
+            catch { /*do nothing*/}
         }
 
         private void receber_dados_Click(object sender, EventArgs e)
