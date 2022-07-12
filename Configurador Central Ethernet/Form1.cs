@@ -39,12 +39,18 @@ namespace Configurador_Central_Ethernet
             if(tabControl1.SelectedTab == connection_page)
             {
                 Timer1.Stop();
-                MessageBox.Show("Nenhuma placa encontrada.","Mensagem automática.");
+                MessageBox.Show("Nenhuma placa encontrada.","Mensagem automática.");                
+                search_data.Enabled = true;
+                search_data.BackColor = Color.WhiteSmoke;
             }
             else
             {
                 Timer1.Stop();
                 MessageBox.Show("Nenhuma resposta da placa.","Falha na comunicação.");
+                receber_dados.Enabled = true;
+                receber_dados.BackColor = Color.Black;
+                enviar_dados.Enabled = true;                
+                enviar_dados.BackColor = Color.Black;
             }
             
         }
@@ -103,9 +109,9 @@ namespace Configurador_Central_Ethernet
                 {
                     string ip1 = ip.Address.ToString();
                     IP_list.Items.Add(ip1 + "\t" + "Unknown Host");
-                }
-
-                
+                }                                                    
+                search_data.BackColor = Color.WhiteSmoke;
+                search_data.Enabled = true;
             }
             else if (permission)
             {
@@ -117,11 +123,15 @@ namespace Configurador_Central_Ethernet
                     {
                         Timer1.Stop();
                         MessageBox.Show("Dados enviados com sucesso.","Mensagem automática.");
+                        enviar_dados.BackColor = Color.Black;
+                        enviar_dados.Enabled = true;                        
                     }
                     else if (datasent == false && Timer1.Enabled == true)
                     {
                         Timer1.Stop(); 
                         MessageBox.Show("Dados recebidos com sucesso.", "Mensagem automática.");                        
+                        receber_dados.BackColor = Color.Black;
+                        receber_dados.Enabled = true;
                     }
                 }
             }
@@ -145,6 +155,8 @@ namespace Configurador_Central_Ethernet
 
         private void search_data_Click(object sender, EventArgs e)
         {
+            search_data.BackColor = Color.LightGray;
+            search_data.Enabled = false;
             this.IP_list.Items.Clear(); 
             foreach (String ip in ip_broadcast)
             {
@@ -339,6 +351,9 @@ namespace Configurador_Central_Ethernet
 
         private void enviar_dados_Click(object sender, EventArgs e)
         {
+            enviar_dados.BackColor = Color.LightGray;
+            enviar_dados.Enabled = false;
+            
             if (!string.IsNullOrEmpty(ip_concentrador.Text) && IsAddressValid(ip_concentrador.Text))
             {
                 Send_Data = ip_concentrador.Text;
@@ -346,6 +361,8 @@ namespace Configurador_Central_Ethernet
             else
             {
                 MessageBox.Show("Endereço IP Inválido!");
+                enviar_dados.BackColor = Color.Black;
+                enviar_dados.Enabled = true;
                 return;
             }
 
@@ -356,6 +373,8 @@ namespace Configurador_Central_Ethernet
             else
             {
                 MessageBox.Show("Porta Inválida!");
+                enviar_dados.BackColor = Color.Black;
+                enviar_dados.Enabled = true;
                 return;
             }
 
@@ -548,7 +567,8 @@ namespace Configurador_Central_Ethernet
                 else
                     bico9a.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 0
                 if (message.Substring(0, a) == "AA")
@@ -556,7 +576,8 @@ namespace Configurador_Central_Ethernet
                 else
                     preco0.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 1
                 if (message.Substring(0, a) == "AA")
@@ -564,7 +585,8 @@ namespace Configurador_Central_Ethernet
                 else
                     preco1.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 2
                 if (message.Substring(0, a) == "AA")
@@ -572,7 +594,8 @@ namespace Configurador_Central_Ethernet
                 else
                     preco2.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 3
                 if (message.Substring(0, a) == "AA")
@@ -580,7 +603,8 @@ namespace Configurador_Central_Ethernet
                 else
                     preco3.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 4
                 if (message.Substring(0, a) == "AA")
@@ -588,7 +612,8 @@ namespace Configurador_Central_Ethernet
                 else
                     preco4.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 5
                 if (message.Substring(0, a) == "AA")
@@ -596,7 +621,8 @@ namespace Configurador_Central_Ethernet
                 else
                     preco5.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 6
                 if (message.Substring(0, a) == "AA")
@@ -604,7 +630,8 @@ namespace Configurador_Central_Ethernet
                 else
                     preco6.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 7
                 if (message.Substring(0, a) == "AA")
@@ -612,7 +639,8 @@ namespace Configurador_Central_Ethernet
                 else
                     preco7.Text = message.Substring(0, a);
 
-                message = message.Substring(a + 1);
+                message = message.Substring(a + 1);                
+                message = AjustString(message);
                 a = message.IndexOf("-");
                 //PREÇO 8
                 if (message.Substring(0, a) == "AA")
@@ -621,18 +649,20 @@ namespace Configurador_Central_Ethernet
                     preco8.Text = message.Substring(0, a);
 
                 message = message.Substring(a + 1);
-                a = message.IndexOf("-");
+                message = AjustString(message);
                 //PREÇO 9
-                if (message.Substring(0, a) == "AA")
+                if (message == "AA")
                     preco9.Text = "";
                 else
-                    preco9.Text = message.Substring(0, a);
+                    preco9.Text = message;
             }
             catch { /*do nothing*/}
         }
 
         private void receber_dados_Click(object sender, EventArgs e)
         {
+            receber_dados.BackColor = Color.LightGray;
+            receber_dados.Enabled = false;
             clean_config_data();
             Send("GET", ip_placa.Text);
             datasent = false;
@@ -662,7 +692,33 @@ namespace Configurador_Central_Ethernet
         }
 
         
-
+        public string AjustString(string message)
+        {
+            int a = message.IndexOf("-");
+            string number = message.Substring(0, a);
+            message = message.Substring(a + 1);
+            string posVirgula;
+            try
+            {
+                a = message.IndexOf("-");
+                posVirgula = message.Substring(0, a);
+                message = message.Substring(a);
+            }
+            catch
+            {
+                posVirgula = message;
+                message = "";
+            }
+            if (posVirgula == "0")
+            {
+               message = number.Substring(0, 1) + "," + number.Substring(1,3)+message;
+            }
+            else
+            {
+                message =  number.Substring(0, 2) + "," + number.Substring(2,2) + message;
+            }
+            return message;
+        }
        
 
 

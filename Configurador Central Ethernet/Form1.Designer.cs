@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.config_page = new System.Windows.Forms.TabPage();
             this.enviar_dados = new System.Windows.Forms.Button();
             this.receber_dados = new System.Windows.Forms.Button();
@@ -991,7 +992,7 @@
             // 
             // Clean_data
             // 
-            this.Clean_data.BackColor = System.Drawing.Color.White;
+            this.Clean_data.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Clean_data.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Clean_data.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Clean_data.ForeColor = System.Drawing.Color.Black;
@@ -1000,7 +1001,7 @@
             this.Clean_data.Size = new System.Drawing.Size(183, 56);
             this.Clean_data.TabIndex = 3;
             this.Clean_data.Text = "Limpar dados";
-            this.Clean_data.UseVisualStyleBackColor = true;
+            this.Clean_data.UseVisualStyleBackColor = false;
             this.Clean_data.Click += new System.EventHandler(this.Clean_dataclick);
             // 
             // label2
@@ -1017,7 +1018,7 @@
             // 
             // search_data
             // 
-            this.search_data.BackColor = System.Drawing.Color.White;
+            this.search_data.BackColor = System.Drawing.Color.WhiteSmoke;
             this.search_data.Cursor = System.Windows.Forms.Cursors.Hand;
             this.search_data.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.search_data.ForeColor = System.Drawing.Color.Black;
@@ -1026,7 +1027,7 @@
             this.search_data.Size = new System.Drawing.Size(183, 56);
             this.search_data.TabIndex = 3;
             this.search_data.Text = "↻ Procurar Placas";
-            this.search_data.UseVisualStyleBackColor = true;
+            this.search_data.UseVisualStyleBackColor = false;
             this.search_data.Click += new System.EventHandler(this.search_data_Click);
             // 
             // tabControl1
@@ -1053,9 +1054,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(891, 493);
+            this.ClientSize = new System.Drawing.Size(891, 489);
             this.Controls.Add(this.tabControl1);
             this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "VEX TECNOLOGIA - Configurador Central Ethernet - v1.0.0";
             this.Load += new System.EventHandler(this.LoadForm1);
